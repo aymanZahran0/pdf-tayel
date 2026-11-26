@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A clean, secure home for your PDF documents." />
+  <title>Paperly — PDF Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="brand" aria-label="Paperly home"><span class="brand-mark">P</span><span>paperly</span></a>
+    <nav aria-label="Main navigation">
+      <button class="nav-link active" data-view="library">Library</button>
+      <button class="nav-link" data-view="admin">Admin</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="libraryView" class="view active">
+      <div class="hero">
+        <div class="eyebrow"><span></span> DOCUMENT LIBRARY</div>
+        <h1>Everything worth reading,<br><em>all in one place.</em></h1>
+        <p>Browse, preview, and download your documents without the clutter.</p>
+        <div class="search-wrap">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+          <input id="searchInput" type="search" placeholder="Search documents..." aria-label="Search documents" />
+          <kbd>⌘ K</kbd>
+        </div>
+      </div>
+      <div class="content-shell">
+        <div class="section-heading"><div><h2>Recent documents</h2><p id="documentCount">0 documents</p></div><button class="sort-btn">Newest first <span>⌄</span></button></div>
+        <div id="documentGrid" class="document-grid"></div>
+        <div id="emptyState" class="empty-state hidden"><div class="empty-icon">⌕</div><h3>No documents found</h3><p>Try a different search, or upload a PDF from the admin area.</p></div>
+      </div>
+    </section>
+
+    <section id="adminView" class="view">
+      <div id="loginPanel" class="login-panel">
+        <div class="login-art"><div class="art-copy"><span class="mini-mark">P</span><h2>Your library,<br>beautifully managed.</h2><p>A calm place to keep every important document organized and accessible.</p></div><div class="paper-stack"><i></i><i></i><i></i></div></div>
+        <form id="loginForm" class="login-card">
+          <div class="eyebrow"><span></span> ADMIN ACCESS</div>
+          <h1>Welcome back.</h1><p>Sign in to manage your document library.</p>
+          <label>Email address<input id="email" type="email" value="admin@paperly.co" required></label>
+          <label>Password<div class="password-field"><input id="password" type="password" value="admin123" required><button type="button" id="showPassword" aria-label="Show password">◉</button></div></label>
+          <button class="primary-btn" type="submit">Sign in</button>
+          <p class="demo-note">Demo access: admin@paperly.co / admin123</p>
+          <p id="loginError" class="error-text"></p>
+        </form>
+      </div>
+
+      <div id="dashboard" class="dashboard hidden">
+        <aside><div class="brand light"><span class="brand-mark">P</span><span>paperly</span></div><div class="admin-label">ADMIN WORKSPACE</div><button class="side-link active">▦ <span>Documents</span></button><div class="aside-bottom"><button id="logoutBtn" class="side-link">↪ <span>Sign out</span></button><div class="profile"><span>AM</span><div><strong>Alex Morgan</strong><small>Administrator</small></div></div></div></aside>
+        <div class="dash-main">
+          <div class="dash-head"><div><div class="eyebrow"><span></span> DOCUMENTS</div><h1>Library management</h1><p>Upload, organize, and manage your PDF collection.</p></div><button id="openUpload" class="primary-btn">＋ Upload PDF</button></div>
+          <div class="stats"><div><small>TOTAL DOCUMENTS</small><strong id="totalStat">0</strong><span>In your library</span></div><div><small>TOTAL STORAGE</small><strong id="storageStat">0 MB</strong><span>Across all files</span></div><div><small>LAST UPLOAD</small><strong id="lastStat">—</strong><span>Most recent activity</span></div></div>
+          <div class="admin-table"><div class="table-title"><h2>All documents</h2><span id="adminCount">0 files</span></div><div class="table-row table-head"><span>DOCUMENT</span><span>SIZE</span><span>UPLOADED</span><span></span></div><div id="adminRows"></div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="uploadDialog"><form id="uploadForm"><div class="dialog-head"><div><h2>Upload PDF</h2><p>Add a new document to your library.</p></div><button type="button" class="icon-btn" data-close>×</button></div><label>Document title<input id="docTitle" placeholder="e.g. Annual report 2026" required></label><label id="dropZone" class="drop-zone"><input id="pdfFile" type="file" accept="application/pdf" required><span class="upload-icon">⇧</span><strong>Choose a PDF file</strong><small>or drag and drop · max 20 MB</small><em id="fileName"></em></label><div id="progressWrap" class="progress-wrap hidden"><div><span>Uploading...</span><span id="progressText">0%</span></div><progress id="progressBar" max="100" value="0"></progress></div><div class="dialog-actions"><button type="button" class="secondary-btn" data-close>Cancel</button><button type="submit" class="primary-btn">Upload document</button></div></form></dialog>
+  <dialog id="viewerDialog" class="viewer-dialog"><div class="viewer-head"><strong id="viewerTitle"></strong><div><a id="viewerDownload" class="secondary-btn" download>Download</a><button class="icon-btn" data-viewer-close>×</button></div></div><iframe id="pdfViewer" title="PDF preview"></iframe></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
