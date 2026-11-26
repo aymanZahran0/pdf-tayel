@@ -9,14 +9,47 @@ export default function SupabaseUploadDialog({
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [validationMessage, setValidationMessage] = useState("");
+  const validationTimerRef = useRef(null);
   useEffect(() => {
     open ? ref.current?.showModal() : ref.current?.close();
+    if (!open) setValidationMessage("");
   }, [open]);
+
+  useEffect(() => () => clearTimeout(validationTimerRef.current), []);
+
+  const showValidation = (message) => {
+    setValidationMessage(message);
+    clearTimeout(validationTimerRef.current);
+    validationTimerRef.current = setTimeout(
+      () => setValidationMessage(""),
+      3500,
+    );
+  };
+
+  const selectFile = (event) => {
+    const selectedFile = event.target.files[0];
+    if (!selectedFile) return;
+    if (selectedFile.type !== "application/pdf") {
+      setFile(null);
+      event.target.value = "";
+      showValidation("الملف غير مدعوم — اختر ملف PDF فقط");
+      return;
+    }
+    if (selectedFile.size > 20e6) {
+      setFile(null);
+      event.target.value = "";
+      showValidation("حجم الملف أكبر من ٢٠ م.ب");
+      return;
+    }
+    setValidationMessage("");
+    setFile(selectedFile);
+  };
   const submit = async (event) => {
     event.preventDefault();
     if (!file || file.type !== "application/pdf")
-      return onMessage("من فضلك اختر ملف PDF صحيحاً");
-    if (file.size > 20e6) return onMessage("يجب ألا يزيد حجم الملف على ٢٠ م.ب");
+      return showValidation("اختر ملف PDF صحيحاً أولاً");
+    if (file.size > 20e6) return showValidation("حجم الملف أكبر من ٢٠ م.ب");
     setUploading(true);
     try {
       await onUpload({ title: title.trim(), file });
@@ -25,7 +58,7 @@ export default function SupabaseUploadDialog({
       onClose();
       onMessage("تم رفع المستند بنجاح");
     } catch (error) {
-      onMessage(`تعذر رفع الملف: ${error.message}`);
+      showValidation(`تعذر رفع الملف: ${error.message}`);
     } finally {
       setUploading(false);
     }
@@ -33,6 +66,12 @@ export default function SupabaseUploadDialog({
   return (
     <dialog ref={ref} onCancel={onClose}>
       <form onSubmit={submit}>
+        {validationMessage && (
+          <div className="upload-dialog-toast" role="alert">
+            <span>!</span>
+            <strong>{validationMessage}</strong>
+          </div>
+        )}
         <div className="dialog-head">
           <div>
             <h2>رفع ملف PDF</h2>
@@ -55,7 +94,7 @@ export default function SupabaseUploadDialog({
           <input
             type="file"
             accept="application/pdf"
-            onChange={(event) => setFile(event.target.files[0])}
+            onChange={selectFile}
             required
           />
           <span className="upload-icon">⇧</span>
