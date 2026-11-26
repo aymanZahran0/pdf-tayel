@@ -1,3 +1,92 @@
-import { useEffect,useRef,useState } from 'react';
-import { arabicNumber } from '../utils/format';
-export default function UploadDialog({open,onClose,onUpload,onMessage}) { const ref=useRef(); const [title,setTitle]=useState(''); const [file,setFile]=useState(null); const [progress,setProgress]=useState(0); useEffect(()=>{open?ref.current?.showModal():ref.current?.close()},[open]); const submit=e=>{e.preventDefault();if(!file||file.type!=='application/pdf')return onMessage('من فضلك اختر ملف PDF صحيحاً');if(file.size>20e6)return onMessage('يجب ألا يزيد حجم الملف على ٢٠ م.ب');let value=0;const timer=setInterval(()=>{value+=20;setProgress(value);if(value>=100){clearInterval(timer);onUpload({id:crypto.randomUUID(),title:title.trim(),size:file.size,date:new Date().toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'}),url:URL.createObjectURL(file)});setTitle('');setFile(null);setProgress(0);onClose();onMessage('تم رفع المستند بنجاح')}},120)}; return <dialog ref={ref} onCancel={onClose}><form onSubmit={submit}><div className="dialog-head"><div><h2>رفع ملف PDF</h2><p>أضف مستنداً جديداً إلى مكتبتك.</p></div><button type="button" className="icon-btn" onClick={onClose}>×</button></div><label>عنوان المستند<input value={title} onChange={e=>setTitle(e.target.value)} placeholder="مثال: التقرير السنوي ٢٠٢٦" required /></label><label className="drop-zone"><input type="file" accept="application/pdf" onChange={e=>setFile(e.target.files[0])} required /><span className="upload-icon">⇧</span><strong>اختر ملف PDF</strong><small>الحد الأقصى ٢٠ م.ب</small><em>{file?.name}</em></label>{progress>0&&<div className="progress-wrap"><div><span>جارٍ الرفع...</span><span>{arabicNumber(progress)}٪</span></div><progress max="100" value={progress}/></div>}<div className="dialog-actions"><button type="button" className="secondary-btn" onClick={onClose}>إلغاء</button><button className="primary-btn">رفع المستند</button></div></form></dialog> }
+import { useEffect, useRef, useState } from "react";
+import { arabicNumber } from "../utils/format";
+export default function UploadDialog({ open, onClose, onUpload, onMessage }) {
+  const ref = useRef();
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState(null);
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    open ? ref.current?.showModal() : ref.current?.close();
+  }, [open]);
+  const submit = (e) => {
+    e.preventDefault();
+    if (!file || file.type !== "application/pdf")
+      return onMessage("من فضلك اختر ملف PDF صحيحاً");
+    if (file.size > 20e6) return onMessage("يجب ألا يزيد حجم الملف على ٢٠ م.ب");
+    let value = 0;
+    const timer = setInterval(() => {
+      value += 20;
+      setProgress(value);
+      if (value >= 100) {
+        clearInterval(timer);
+        onUpload({
+          id: crypto.randomUUID(),
+          title: title.trim(),
+          size: file.size,
+          date: new Date().toLocaleDateString("ar-EG", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+          url: URL.createObjectURL(file),
+        });
+        setTitle("");
+        setFile(null);
+        setProgress(0);
+        onClose();
+        onMessage("تم رفع المستند بنجاح");
+      }
+    }, 120);
+  };
+  return (
+    <dialog ref={ref} onCancel={onClose}>
+      <form onSubmit={submit}>
+        <div className="dialog-head">
+          <div>
+            <h2>رفع ملف PDF</h2>
+            <p>أضف مستنداً جديداً إلى مكتبتك.</p>
+          </div>
+          <button type="button" className="icon-btn" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <label>
+          عنوان المستند
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="مثال: التقرير السنوي ٢٠٢٦"
+            required
+          />
+        </label>
+        <label className="drop-zone">
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={(e) => setFile(e.target.files[0])}
+            required
+          />
+          <span className="upload-icon">⇧</span>
+          <strong>اختر ملف PDF</strong>
+          <small>الحد الأقصى ٢٠ م.ب</small>
+          <em>{file?.name}</em>
+        </label>
+        {progress > 0 && (
+          <div className="progress-wrap">
+            <div>
+              <span>جارٍ الرفع...</span>
+              <span>{arabicNumber(progress)}٪</span>
+            </div>
+            <progress max="100" value={progress} />
+          </div>
+        )}
+        <div className="dialog-actions">
+          <button type="button" className="secondary-btn" onClick={onClose}>
+            إلغاء
+          </button>
+          <button className="primary-btn">رفع المستند</button>
+        </div>
+      </form>
+    </dialog>
+  );
+}
