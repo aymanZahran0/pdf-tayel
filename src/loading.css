@@ -115,7 +115,6 @@
 .sort-chevron { position: absolute; left: 13px; top: 50%; transform: translateY(-58%); color: #717875; pointer-events: none; }
 .direct-download-btn { width: 96px; height: 46px; padding: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 96px; }
 .direct-download-btn:disabled { opacity: .7; cursor: wait; }
-.download-button-spinner { width: 15px; height: 15px; flex: 0 0 15px; border: 2px solid #ffffff66; border-top-color: #fff; border-radius: 50%; animation: pdf-loading-spin .7s linear infinite; }
 
 @media (max-width: 600px) {
   .section-heading { gap: 16px; }
