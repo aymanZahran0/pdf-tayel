@@ -1,0 +1,20 @@
+body,button,input{font-family:'Cairo',sans-serif}
+.hero h1,.section-heading h2,.table-title h2,.login-card h1,.art-copy h2,.dash-head h1,.stats strong,.brand,.doc-info h3,.dialog-head h2{font-family:'Cairo',sans-serif}
+.brand-mark,.mini-mark{font-family:'Cairo',sans-serif}
+.search-wrap kbd{direction:ltr}
+.search-wrap input{text-align:right}
+.pdf-badge{left:auto;right:14px}
+.password-field button{right:auto;left:6px}
+.login-art:after{right:auto;left:-130px}
+.file-cell{text-align:right}
+#toast{right:auto;left:24px}
+.admin-label,.eyebrow,.stats small,.table-head{letter-spacing:.08em}
+
+/* Full-height admin workspace */
+body.admin-mode{overflow:hidden}
+body.admin-mode .topbar{display:none}
+body.admin-mode .dashboard{height:100vh;height:100dvh;min-height:0;overflow:hidden}
+body.admin-mode .dashboard aside{height:100vh;height:100dvh;min-height:0;position:sticky;top:0;overflow:hidden}
+body.admin-mode .dash-main{height:100vh;height:100dvh;overflow-y:auto}
+.brand-button{border:0;background:transparent;padding:0;cursor:pointer}
+.row-actions{display:flex;align-items:center;gap:6px}.qr-btn{border:1px solid var(--green);background:#edf4f0;color:var(--green);border-radius:7px;padding:6px 8px;font-weight:800}.qr-dialog{padding:28px;width:min(540px,92vw);text-align:center}.qr-dialog .dialog-head{text-align:right}.qr-image{display:block;width:min(300px,75vw);margin:18px auto;border:1px solid var(--line);border-radius:12px}.link-field{display:flex;gap:8px}.link-field input{text-align:left}.qr-download{text-decoration:none}.public-pdf-state{min-height:100vh;display:grid;place-content:center;justify-items:center;text-align:center;padding:30px;background:var(--cream)}.public-pdf-state .brand-mark{margin-bottom:20px}.public-pdf-state p{color:var(--muted);max-width:520px}.public-pdf-state .primary-btn{text-decoration:none}.public-pdf-page{height:100vh;display:flex;flex-direction:column;background:#343434}.public-pdf-header{height:74px;flex:0 0 74px;background:white;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;border-bottom:1px solid var(--line)}.public-pdf-header .primary-btn{text-decoration:none}.public-pdf-page iframe{width:100%;height:calc(100vh - 74px);border:0}

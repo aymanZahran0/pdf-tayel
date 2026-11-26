@@ -1,0 +1,11 @@
+const baseUrl=import.meta.env.VITE_SUPABASE_URL;const apiKey=import.meta.env.VITE_SUPABASE_ANON_KEY;const sessionKey='tayel-supabase-session';
+const getSession=()=>JSON.parse(localStorage.getItem(sessionKey)||'null');const headers=(auth=false)=>({'apikey':apiKey,'Authorization':`Bearer ${auth?(getSession()?.access_token||apiKey):apiKey}`});
+async function parse(response){if(response.ok){const text=await response.text();return text?JSON.parse(text):null}const error=await response.json().catch(()=>({message:response.statusText}));throw new Error(error.message||error.error_description||'Supabase request failed')}
+export async function signIn(email,password){const data=await parse(await fetch(`${baseUrl}/auth/v1/token?grant_type=password`,{method:'POST',headers:{...headers(),'Content-Type':'application/json'},body:JSON.stringify({email,password})}));localStorage.setItem(sessionKey,JSON.stringify(data));return data}
+export async function signOut(){const session=getSession();if(session)await fetch(`${baseUrl}/auth/v1/logout`,{method:'POST',headers:headers(true)});localStorage.removeItem(sessionKey)}
+export const hasSession=()=>Boolean(getSession()?.access_token);
+export async function listDocuments(){return parse(await fetch(`${baseUrl}/rest/v1/documents?is_active=eq.true&select=*&order=created_at.desc`,{headers:headers()}))}
+export async function createDocument(record){return (await parse(await fetch(`${baseUrl}/rest/v1/documents`,{method:'POST',headers:{...headers(true),'Content-Type':'application/json','Prefer':'return=representation'},body:JSON.stringify(record)})))[0]}
+export async function removeDocument(id){await parse(await fetch(`${baseUrl}/rest/v1/documents?id=eq.${encodeURIComponent(id)}`,{method:'DELETE',headers:headers(true)}))}
+export async function uploadPdf(path,file){await parse(await fetch(`${baseUrl}/storage/v1/object/pdfs/${path}`,{method:'POST',headers:{...headers(true),'Content-Type':'application/pdf','x-upsert':'false'},body:file}));return `${baseUrl}/storage/v1/object/public/pdfs/${path}`}
+export async function removePdf(path){await parse(await fetch(`${baseUrl}/storage/v1/object/pdfs`,{method:'DELETE',headers:{...headers(true),'Content-Type':'application/json'},body:JSON.stringify({prefixes:[path]})}))}
