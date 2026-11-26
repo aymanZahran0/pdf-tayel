@@ -25,6 +25,18 @@
 .delete-btn:hover { background: #fff0ef; transform: translateY(-1px); }
 .delete-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
+.admin-table .table-row { padding-left: 34px; }
+.admin-table .row-actions { justify-content: flex-start; gap: 12px; }
+.admin-table .qr-btn {
+  min-width: 32px;
+  height: 32px;
+  padding: 3px 6px;
+  font-size: .75rem;
+  line-height: 1;
+}
+.admin-table .delete-btn { width: 32px; height: 32px; }
+.admin-table .delete-btn svg { width: 18px; height: 18px; }
+
 .confirm-dialog {
   width: min(440px, 92vw);
   padding: 34px;
