@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 
-const toDocument = row => ({ id:row.id, publicId:row.public_id, title:row.title, size:Number(row.file_size), date:new Date(row.created_at).toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'}), url:row.file_url, filePath:row.file_path });
+const toDocument = row => ({ id:row.id, publicId:row.public_id, title:row.title, size:Number(row.file_size), date:new Date(row.created_at).toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'}), createdAt:row.created_at, url:row.file_url, filePath:row.file_path });
 
 export function useDocuments() {
   const [documents,setDocuments]=useState([]);
