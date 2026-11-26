@@ -55,5 +55,17 @@
 .danger-btn:hover { background: #982d2b; }
 .danger-btn:disabled, .confirm-actions button:disabled { opacity: .6; cursor: wait; }
 
-#toast { display: flex; align-items: center; gap: 11px; min-width: 260px; }
+#toast {
+  top: 24px;
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 260px;
+  max-width: calc(100vw - 32px);
+  transform: translate(-50%, -80px);
+}
+#toast.show { transform: translate(-50%, 0); }
 .toast-icon { width: 26px; height: 26px; flex: 0 0 26px; display: grid; place-items: center; color: #184f3e; background: #d8f06a; border-radius: 50%; font-weight: 800; }
