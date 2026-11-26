@@ -11,3 +11,37 @@
 @keyframes pdf-loading-spin {
   to { transform: rotate(360deg); }
 }
+
+.delete-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 8px;
+  transition: background .2s, transform .2s;
+}
+
+.delete-btn:hover { background: #fff0ef; transform: translateY(-1px); }
+.delete-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.confirm-dialog {
+  width: min(440px, 92vw);
+  padding: 34px;
+  text-align: center;
+  border: 0;
+  border-radius: 18px;
+}
+
+.confirm-trash { width: 64px; height: 64px; margin: 0 auto 18px; display: grid; place-items: center; color: #b83b38; background: #fff0ef; border-radius: 50%; }
+.confirm-trash svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.confirm-dialog h2 { margin-bottom: 10px; font: 800 1.55rem 'Cairo', sans-serif; }
+.confirm-dialog p { color: #717875; line-height: 1.8; }
+.confirm-dialog strong { color: #202523; }
+.confirm-actions { display: flex; justify-content: center; gap: 10px; margin-top: 26px; }
+.danger-btn { border: 0; border-radius: 9px; padding: 12px 18px; color: white; background: #b83b38; font-weight: 700; }
+.danger-btn:hover { background: #982d2b; }
+.danger-btn:disabled, .confirm-actions button:disabled { opacity: .6; cursor: wait; }
+
+#toast { display: flex; align-items: center; gap: 11px; min-width: 260px; }
+.toast-icon { width: 26px; height: 26px; flex: 0 0 26px; display: grid; place-items: center; color: #184f3e; background: #d8f06a; border-radius: 50%; font-weight: 800; }
