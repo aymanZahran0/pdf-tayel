@@ -32,7 +32,7 @@ export default function PublicPdfPage({ documents, loading }) {
   if (!document.url) return <main className="public-pdf-state"><span className="brand-mark">ط</span><h1>{document.title}</h1><p>بيانات المستند موجودة، لكن ملف PDF يحتاج إلى التخزين في الباك إند ليعمل من جميع الأجهزة.</p><Link className="primary-btn" to="/">العودة إلى المكتبة</Link></main>;
 
   return <main className="public-pdf-page">
-    <header className="public-pdf-header"><Link className="brand" to="/"><span className="brand-mark">ط</span><span>طايل</span></Link><strong>{document.title}</strong><button className="primary-btn direct-download-btn" type="button" onClick={downloadPdf} disabled={downloading}>تحميل</button></header>
+    <header className="public-pdf-header"><Link className="brand" to="/"><span className="brand-mark">ط</span><span>طايل</span></Link><strong>{document.title}</strong><button className="primary-btn direct-download-btn" type="button" onClick={downloadPdf} disabled={downloading} aria-label={downloading?'جارٍ تحميل الملف':'تحميل الملف'}>{downloading?<span className="download-button-spinner" aria-hidden="true"/>:'تحميل'}</button></header>
     <PdfCanvasViewer url={document.url} />
   </main>;
 }

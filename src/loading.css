@@ -113,8 +113,13 @@
 .sort-control svg { width: 20px; height: 20px; flex: 0 0 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .sort-control select { width: 100%; height: 100%; padding: 0; color: #202523; background: transparent; border: 0; outline: 0; appearance: none; cursor: pointer; font-weight: 700; }
 .sort-chevron { position: absolute; left: 13px; top: 50%; transform: translateY(-58%); color: #717875; pointer-events: none; }
+.copy-link-btn { width: 106px; flex: 0 0 106px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: color .2s, background .2s, border-color .2s, transform .2s; }
+.copy-link-btn:hover { transform: translateY(-1px); }
+.copy-link-btn.copied { color: #fff; background: #184f3e; border-color: #184f3e; cursor: default; }
+.copy-link-btn.copied svg { width: 18px; height: 18px; fill: none; stroke: #d8f06a; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .direct-download-btn { width: 96px; height: 46px; padding: 0; display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex: 0 0 96px; }
 .direct-download-btn:disabled { opacity: .7; cursor: wait; }
+.download-button-spinner { width: 18px; height: 18px; display: block; border: 2px solid #ffffff66; border-top-color: #fff; border-radius: 50%; animation: pdf-loading-spin .7s linear infinite; }
 
 @media (max-width: 600px) {
   .section-heading { gap: 16px; }
