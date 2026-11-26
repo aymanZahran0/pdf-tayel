@@ -34,9 +34,9 @@ export default function PdfCanvasViewer({ url }) {
     Promise.all([import('pdfjs-dist'), import('pdfjs-dist/build/pdf.worker.min.mjs?url')]).then(([pdfjs, worker]) => {
       if (cancelled) return;
       pdfjs.GlobalWorkerOptions.workerSrc = worker.default;
-      task = pdfjs.getDocument(url);
+      task = pdfjs.getDocument({ url });
       return task.promise;
-    }).then(document => { if (document && !cancelled) setPdf(document); }).catch(() => { if (!cancelled) setError('تعذر عرض ملف PDF. يمكنك استخدام زر التحميل.'); });
+    }).then(document => { if (document && !cancelled) setPdf(document); }).catch(error => { console.error('PDF viewer error:', error); if (!cancelled) setError('تعذر عرض ملف PDF. يمكنك استخدام زر التحميل.'); });
     return () => { cancelled = true; task?.destroy(); };
   }, [url]);
 
