@@ -27,12 +27,12 @@ export default function PublicPdfPage({ documents, loading }) {
     }
   };
 
-  if (loading) return <main className="public-pdf-state"><span className="brand-mark">ط</span><div className="pdf-loading-spinner" /><h1>جارٍ فتح المستند...</h1><p>يتم تحميل ملف PDF، انتظر لحظات.</p></main>;
-  if (!document) return <main className="public-pdf-state"><span className="brand-mark">ط</span><h1>المستند غير موجود</h1><p>قد يكون الرابط غير صحيح أو تم حذف المستند.</p><Link className="primary-btn" to="/">العودة إلى المكتبة</Link></main>;
-  if (!document.url) return <main className="public-pdf-state"><span className="brand-mark">ط</span><h1>{document.title}</h1><p>بيانات المستند موجودة، لكن ملف PDF يحتاج إلى التخزين في الباك إند ليعمل من جميع الأجهزة.</p><Link className="primary-btn" to="/">العودة إلى المكتبة</Link></main>;
+  if (loading) return <main className="public-pdf-state"><span className="brand-mark">S</span><div className="pdf-loading-spinner" /><h1>جارٍ فتح المستند...</h1><p>يتم تحميل ملف PDF، انتظر لحظات.</p></main>;
+  if (!document) return <main className="public-pdf-state"><span className="brand-mark">S</span><h1>المستند غير موجود</h1><p>قد يكون الرابط غير صحيح أو تم حذف المستند.</p><Link className="primary-btn" to="/">العودة إلى المكتبة</Link></main>;
+  if (!document.url) return <main className="public-pdf-state"><span className="brand-mark">S</span><h1>{document.title}</h1><p>بيانات المستند موجودة، لكن ملف PDF يحتاج إلى التخزين في الباك إند ليعمل من جميع الأجهزة.</p><Link className="primary-btn" to="/">العودة إلى المكتبة</Link></main>;
 
   return <main className="public-pdf-page">
-    <header className="public-pdf-header"><Link className="brand" to="/"><span className="brand-mark">ط</span><span>طايل</span></Link><strong>{document.title}</strong><button className="primary-btn direct-download-btn" type="button" onClick={downloadPdf} disabled={downloading} aria-label={downloading?'جارٍ تحميل الملف':'تحميل الملف'}>{downloading?<span className="download-button-spinner" aria-hidden="true"/>:'تحميل'}</button></header>
+    <header className="public-pdf-header"><Link className="brand" to="/"><span className="brand-mark">S</span><span className="brand-name" dir="ltr"><span>Saudi</span><span className="brand-accent">TUV</span></span></Link><strong>{document.title}</strong><button className="primary-btn direct-download-btn" type="button" onClick={downloadPdf} disabled={downloading} aria-label={downloading?'جارٍ تحميل الملف':'تحميل الملف'}>{downloading?<span className="download-button-spinner" aria-hidden="true"/>:'تحميل'}</button></header>
     <PdfCanvasViewer url={document.url} />
   </main>;
 }

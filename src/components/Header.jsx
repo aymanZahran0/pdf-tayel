@@ -5,8 +5,8 @@ export default function Header({ view, onChangeView }) {
         className="brand brand-button"
         onClick={() => onChangeView("library")}
       >
-        <span className="brand-mark">ط</span>
-        <span>طايل</span>
+        <span className="brand-mark">S</span>
+        <span className="brand-name" dir="ltr"><span>Saudi</span><span className="brand-accent">TUV</span></span>
       </button>
       <nav aria-label="التنقل الرئيسي">
         <button

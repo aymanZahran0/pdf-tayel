@@ -2,8 +2,8 @@ export default function AdminSidebar({ onLogout }) {
   return (
     <aside>
       <div className="brand light">
-        <span className="brand-mark">ط</span>
-        <span>طايل</span>
+        <span className="brand-mark">S</span>
+        <span className="brand-name" dir="ltr"><span>Saudi</span><span className="brand-accent">TUV</span></span>
       </div>
       <div className="admin-label">مساحة الإدارة</div>
       <button className="side-link active">

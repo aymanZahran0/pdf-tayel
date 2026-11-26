@@ -216,6 +216,18 @@
   }
 }
 
+.brand-name {
+  display: inline-flex;
+  align-items: baseline;
+  direction: ltr;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  letter-spacing: -.035em;
+}
+.brand-name .brand-accent { color: #1f6b53; }
+.brand.light .brand-name { color: #fff; }
+.brand.light .brand-name .brand-accent { color: #d8f06a; }
+
 .sort-control {
   position: relative;
   display: flex;
