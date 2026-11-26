@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
+import PdfCanvasViewer from '../components/PdfCanvasViewer';
 
 export default function PublicPdfPage({ documents, loading }) {
   const { publicId } = useParams();
@@ -10,6 +11,6 @@ export default function PublicPdfPage({ documents, loading }) {
 
   return <main className="public-pdf-page">
     <header className="public-pdf-header"><Link className="brand" to="/"><span className="brand-mark">ط</span><span>طايل</span></Link><strong>{document.title}</strong><a className="primary-btn" href={document.url} download={`${document.title}.pdf`}>تحميل</a></header>
-    <iframe src={document.url} title={document.title} />
+    <PdfCanvasViewer url={document.url} />
   </main>;
 }

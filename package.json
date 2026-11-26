@@ -12,6 +12,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.119.2",
     "@vitejs/plugin-react": "latest",
+    "pdfjs-dist": "^6.5.438",
     "qrcode": "latest",
     "react": "latest",
     "react-dom": "latest",
