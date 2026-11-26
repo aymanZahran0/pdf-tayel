@@ -1,29 +1,30 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import PdfCanvasViewer from './PdfCanvasViewer';
+import { downloadPdfFile } from '../utils/downloadPdf';
 export default function PdfViewer({ document, onClose }) {
   const ref = useRef();
+  const [downloading, setDownloading] = useState(false);
   useEffect(() => {
     document ? ref.current?.showModal() : ref.current?.close();
   }, [document]);
+  const download = async () => {
+    if (!document?.url || downloading) return;
+    setDownloading(true);
+    try { await downloadPdfFile(document.url, document.title); }
+    finally { setDownloading(false); }
+  };
   return (
     <dialog ref={ref} className="viewer-dialog" onCancel={onClose}>
       <div className="viewer-head">
         <strong>{document?.title}</strong>
         <div>
-          <a
-            className="secondary-btn"
-            href={document?.url}
-            download={`${document?.title}.pdf`}
-          >
-            تحميل
-          </a>
+          <button className="secondary-btn viewer-download-btn" type="button" onClick={download} disabled={downloading}>{downloading?<span className="download-button-spinner dark" aria-hidden="true"/>:'تحميل'}</button>
           <button className="icon-btn" onClick={onClose}>
             ×
           </button>
         </div>
       </div>
-      {document && (
-        <iframe id="pdfViewer" src={document.url} title="معاينة ملف PDF" />
-      )}
+      {document && <PdfCanvasViewer url={document.url} />}
     </dialog>
   );
 }

@@ -1,10 +1,17 @@
+import { useState } from 'react';
 import { formatSize } from "../utils/format";
+import { downloadPdfFile } from '../utils/downloadPdf';
 export default function DocumentCard({ document, onPreview, onMessage }) {
-  const download = (e) => {
+  const [downloading, setDownloading] = useState(false);
+  const download = async () => {
     if (!document.url) {
-      e.preventDefault();
       onMessage("ارفع ملف PDF أولاً لتفعيل التحميل");
+      return;
     }
+    setDownloading(true);
+    try { await downloadPdfFile(document.url, document.title); }
+    catch { onMessage('تعذر تحميل الملف، حاول مرة أخرى'); }
+    finally { setDownloading(false); }
   };
   return (
     <article className="doc-card">
@@ -22,14 +29,7 @@ export default function DocumentCard({ document, onPreview, onMessage }) {
           <button className="view-btn" onClick={() => onPreview(document)}>
             معاينة
           </button>
-          <a
-            className="download-btn"
-            href={document.url || "#"}
-            download={`${document.title}.pdf`}
-            onClick={download}
-          >
-            تحميل
-          </a>
+          <button className="download-btn" type="button" onClick={download} disabled={downloading}>{downloading?<span className="download-button-spinner card" aria-hidden="true"/>:'تحميل'}</button>
         </div>
       </div>
     </article>

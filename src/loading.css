@@ -383,6 +383,12 @@
   border-radius: 50%;
   animation: pdf-loading-spin 0.7s linear infinite;
 }
+.download-button-spinner.dark,
+.download-button-spinner.card { border-color: #184f3e33; border-top-color: #184f3e; }
+.viewer-dialog[open] { display: flex; flex-direction: column; overflow: hidden; }
+.viewer-dialog .pdf-canvas-viewer { width: 100%; }
+.viewer-download-btn { width: 82px; height: 42px; display: inline-flex; align-items: center; justify-content: center; }
+.download-btn:disabled, .viewer-download-btn:disabled { opacity: .7; cursor: wait; }
 
 @media (max-width: 600px) {
   .section-heading {
