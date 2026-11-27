@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { getPdfViewerUrl } from "../utils/pdfViewerUrl";
 
 export default function PublicPdfPage({ documents, loading }) {
   const { publicId } = useParams();
@@ -32,7 +33,7 @@ export default function PublicPdfPage({ documents, loading }) {
         </Link>
       </main>
     );
-  const viewerUrl = `${document.url}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`;
+  const viewerUrl = getPdfViewerUrl(document.url);
 
   return (
     <main className="public-pdf-clean-viewer">
