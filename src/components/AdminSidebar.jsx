@@ -9,6 +9,9 @@ export default function AdminSidebar({ onLogout }) {
       <button className="side-link active">
         ▦ <span>المستندات</span>
       </button>
+      <a className="side-link mobile-library-link" href="/">
+        المكتبة
+      </a>
       <div className="aside-bottom">
         <button className="side-link" onClick={onLogout}>
           ↪ <span>تسجيل الخروج</span>

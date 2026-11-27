@@ -457,3 +457,111 @@
     padding-right: 11px;
   }
 }
+
+.mobile-library-link {
+  display: none;
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  body.admin-mode .dashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+  }
+  body.admin-mode .dashboard aside {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 64px;
+    min-height: 64px;
+    padding: 8px 14px;
+    overflow: visible;
+  }
+  .dashboard aside .brand.light {
+    margin: 0;
+  }
+  .dashboard aside .admin-label,
+  .dashboard aside > .side-link.active,
+  .dashboard aside .profile {
+    display: none;
+  }
+  .dashboard aside .mobile-library-link {
+    display: inline-flex;
+    margin-inline-start: auto;
+    color: #fff;
+    font-size: 0.78rem;
+    padding: 8px 10px;
+  }
+  .dashboard aside .aside-bottom {
+    display: flex;
+    margin: 0;
+  }
+  .dashboard aside .aside-bottom .side-link {
+    padding: 8px 10px;
+    color: #fff;
+    font-size: 0.78rem;
+  }
+  .dashboard aside .aside-bottom .side-link span {
+    display: inline;
+  }
+  body.admin-mode .dash-main {
+    height: calc(100dvh - 64px);
+    padding: 20px 14px 28px;
+  }
+  .dash-head {
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .dash-head .eyebrow {
+    font-size: 0.62rem;
+  }
+  .dash-head h1 {
+    margin: 9px 0 5px;
+    font-size: 1.55rem;
+  }
+  .dash-head p {
+    font-size: 0.82rem;
+    line-height: 1.55;
+  }
+  .dash-head .primary-btn {
+    flex: 0 0 auto;
+    padding: 9px 11px;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+  .stats {
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .stats > div {
+    min-height: 0;
+    padding: 15px;
+  }
+  .stats small {
+    font-size: 0.7rem;
+  }
+  .stats strong {
+    margin: 9px 0 2px;
+    font-size: 1.45rem;
+  }
+  .stats span {
+    font-size: 0.7rem;
+  }
+  .admin-table .table-title {
+    padding: 14px;
+  }
+  .admin-table .table-title h2 {
+    font-size: 1rem;
+  }
+  .admin-table .table-row {
+    padding: 10px;
+    font-size: 0.78rem;
+  }
+}
