@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import PdfCanvasViewer from './PdfCanvasViewer';
 import { downloadPdfFile } from '../utils/downloadPdf';
 export default function PdfViewer({ document, onClose }) {
   const ref = useRef();
@@ -24,7 +23,13 @@ export default function PdfViewer({ document, onClose }) {
           </button>
         </div>
       </div>
-      {document && <PdfCanvasViewer url={document.url} />}
+      {document?.url && (
+        <iframe
+          className="viewer-native-pdf"
+          src={`${document.url}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
+          title={document.title}
+        />
+      )}
     </dialog>
   );
 }
