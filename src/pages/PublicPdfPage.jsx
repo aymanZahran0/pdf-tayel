@@ -1,10 +1,20 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import PdfCanvasViewer from "../components/PdfCanvasViewer";
-import { getPdfViewerUrl, isMobilePdfBrowser } from "../utils/pdfViewerUrl";
+import {
+  getMobileDirectPdfUrl,
+  getPdfViewerUrl,
+  isMobilePdfBrowser,
+} from "../utils/pdfViewerUrl";
 
 export default function PublicPdfPage({ documents, loading }) {
   const { publicId } = useParams();
   const document = documents.find((item) => item.publicId === publicId);
+
+  useEffect(() => {
+    if (document?.url && isMobilePdfBrowser()) {
+      window.location.replace(getMobileDirectPdfUrl(document.url));
+    }
+  }, [document?.url]);
 
   if (loading)
     return (
@@ -36,7 +46,13 @@ export default function PublicPdfPage({ documents, loading }) {
     );
   const viewerUrl = getPdfViewerUrl(document.url);
 
-  if (isMobilePdfBrowser()) return <PdfCanvasViewer url={document.url} />;
+  if (isMobilePdfBrowser())
+    return (
+      <main className="public-pdf-state" dir="rtl">
+        <div className="pdf-loading-spinner" />
+        <h1>جارٍ فتح المستند...</h1>
+      </main>
+    );
 
   return (
     <main className="public-pdf-clean-viewer">

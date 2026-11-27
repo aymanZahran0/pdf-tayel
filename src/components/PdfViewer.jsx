@@ -1,13 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { downloadPdfFile } from "../utils/downloadPdf";
-import PdfCanvasViewer from "./PdfCanvasViewer";
-import { getPdfViewerUrl, isMobilePdfBrowser } from "../utils/pdfViewerUrl";
+import {
+  getMobileDirectPdfUrl,
+  getPdfViewerUrl,
+  isMobilePdfBrowser,
+} from "../utils/pdfViewerUrl";
 export default function PdfViewer({ document, onClose }) {
   const ref = useRef();
   const [downloading, setDownloading] = useState(false);
   useEffect(() => {
     document ? ref.current?.showModal() : ref.current?.close();
   }, [document]);
+  useEffect(() => {
+    if (document?.url && isMobilePdfBrowser()) {
+      window.location.assign(getMobileDirectPdfUrl(document.url));
+    }
+  }, [document?.url]);
   const download = async () => {
     if (!document?.url || downloading) return;
     setDownloading(true);
@@ -42,7 +50,11 @@ export default function PdfViewer({ document, onClose }) {
           </button>
         </div>
       </div>
-      {document?.url && isMobilePdfBrowser() && <PdfCanvasViewer url={document.url} />}
+      {document?.url && isMobilePdfBrowser() && (
+        <div className="pdf-viewer-status">
+          <span className="pdf-loading-spinner" /> جارٍ فتح المستند...
+        </div>
+      )}
       {document?.url && !isMobilePdfBrowser() && (
         <iframe
           className="viewer-native-pdf"

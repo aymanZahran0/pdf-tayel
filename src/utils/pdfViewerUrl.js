@@ -10,3 +10,7 @@ export function isMobilePdfBrowser() {
     /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
   );
 }
+
+export function getMobileDirectPdfUrl(pdfUrl) {
+  return `/api/pdf?source=${encodeURIComponent(pdfUrl)}`;
+}
