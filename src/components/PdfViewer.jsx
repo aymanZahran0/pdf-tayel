@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { downloadPdfFile } from "../utils/downloadPdf";
-import { getPdfViewerUrl } from "../utils/pdfViewerUrl";
+import PdfCanvasViewer from "./PdfCanvasViewer";
+import { getPdfViewerUrl, isMobilePdfBrowser } from "../utils/pdfViewerUrl";
 export default function PdfViewer({ document, onClose }) {
   const ref = useRef();
   const [downloading, setDownloading] = useState(false);
@@ -41,7 +42,8 @@ export default function PdfViewer({ document, onClose }) {
           </button>
         </div>
       </div>
-      {document?.url && (
+      {document?.url && isMobilePdfBrowser() && <PdfCanvasViewer url={document.url} />}
+      {document?.url && !isMobilePdfBrowser() && (
         <iframe
           className="viewer-native-pdf"
           src={getPdfViewerUrl(document.url)}

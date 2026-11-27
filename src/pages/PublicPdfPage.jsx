@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
-import { getPdfViewerUrl } from "../utils/pdfViewerUrl";
+import PdfCanvasViewer from "../components/PdfCanvasViewer";
+import { getPdfViewerUrl, isMobilePdfBrowser } from "../utils/pdfViewerUrl";
 
 export default function PublicPdfPage({ documents, loading }) {
   const { publicId } = useParams();
@@ -34,6 +35,8 @@ export default function PublicPdfPage({ documents, loading }) {
       </main>
     );
   const viewerUrl = getPdfViewerUrl(document.url);
+
+  if (isMobilePdfBrowser()) return <PdfCanvasViewer url={document.url} />;
 
   return (
     <main className="public-pdf-clean-viewer">
