@@ -32,7 +32,7 @@ export default function PublicPdfPage({ documents, loading }) {
         </Link>
       </main>
     );
-  const viewerUrl = `${document.url}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`;
+  const viewerUrl = `${document.url}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`;
 
   return (
     <main className="public-pdf-clean-viewer">
